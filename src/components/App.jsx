@@ -10,7 +10,7 @@
 //     </div>
 //   </div>
 // );
-
+//Credentials key: AIzaSyCCFySszTAc7O1MjHwXFJbbyI5cX3w8Gyo
 class App extends React.Component { 
   
   constructor(props) {
