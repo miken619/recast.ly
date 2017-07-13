@@ -16,6 +16,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.onClickHandler = this.onClickHandler.bind(this);
+    this.onSubmitHandler = this.onClickHandler.bind(this);
     this.state = {
       currentVideo: window.exampleVideoData[0],
       allVideo: window.exampleVideoData,
@@ -24,13 +25,18 @@ class App extends React.Component {
   onClickHandler(props) {
     this.setState({currentVideo: props});          
   }
+  
+  onSubmitHandler(props) {
+    console.log('ddddddddddddd' + props);
+    //this.setState({allVideo: props});
+  }
 
  
 
   render() {
     return (
       <div>
-        <Nav />
+        <Nav handleSubmit={this.onSubmitHandler}/>
         <div className="col-md-7">
           <VideoPlayer video={this.state.currentVideo}/>
         </div>

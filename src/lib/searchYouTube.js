@@ -1,33 +1,29 @@
 var searchYouTube = (options, callback) => {
   // TODO
-  $('document').ready(function() {
-    var searchForCats = gapi.client.youtube.search.list({
-      part: 'snippet',
-      type: 'video',
-      q: encodeURIComponent('cats'.replace(/%20/g, '+')),
-      maxResults: 3,
-      order: 'viewCount',
-      publishedAfter: '2015-01=01t00:00:00Z'
-    });
-    
 
-    request.execute(function(response) {
-      var results = reponse.result;
-      
-      for (var i = 0; i < results.items.length; ++i) {
-        console.log('VideoId: ' + results.items[i].id.videoId);
-      }
-    });
-   
-  
-  });
+  options.type = 'video';
+  options.part = 'snippet';
+  options.q = options.query;
+  options.maxResults = options.max;
+  $.ajax({
+    // This is the url you should use to communicate with the parse API server.
+    url: 'https://www.googleapis.com/youtube/v3/search',
+    type: 'GET',
+    dataType: 'json',
+    data: options,
+    success: function (data) {
+      console.log(data);
+      return callback(data.items);
+    },
+    error: function (data) {
+      // See: https://developer.mozilla.org/en-US/docs/Web/API/console.error
+        
+      console.error('youtube: Failed to get video', data);
+    }
+  }); 
+ 
 };
 
-var init = () => {
-  gapi.client.setApiKey(window.YOUTUBE_API_KEY);
-  gapi.client.load('youtube', 'v3', function() {
-    console.log('youtube api is ready');
-  });
-};
+
 window.searchYouTube = searchYouTube;
 
